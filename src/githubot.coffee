@@ -36,7 +36,8 @@ class Github
     if url[0..3] isnt "http"
       url = "/#{url}" unless url[0] is "/"
       url = "#{url_api_base}#{url}"
-    req = http.create(url).header("Accept", "application/vnd.github.#{@_opt "apiVersion"}+json")
+    client_options = rejectUnauthorized: false
+    req = http.create(url, client_options).header("Accept", "application/vnd.github.#{@_opt "apiVersion"}+json")
     req = req.header("Host", "github.groupondev.com")
     req = req.header("User-Agent", "GitHubot/#{version}")
     oauth_token = @_opt "token"
