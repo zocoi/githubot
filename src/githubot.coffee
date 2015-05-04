@@ -42,15 +42,11 @@ class Github
     req = req.header("User-Agent", "GitHubot/#{version}")
     oauth_token = @_opt "token"
     # req = req.header("Authorization", "token #{oauth_token}") if oauth_token?
-    console.log oauth_token, url
     args = []
     args.push JSON.stringify data if data?
     args.push "" if verb is "DELETE" and not data?
     task = run: (cb) -> req[verb.toLowerCase()](args...) cb
     @requestQueue.push task, (err, res, body) =>
-      console.log "err", err
-      console.log "body", body
-      console.log "res", res
       if err?
         return @_errorHandler
           statusCode: res?.statusCode
