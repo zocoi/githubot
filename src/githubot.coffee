@@ -50,7 +50,7 @@ class Github
     @requestQueue.push task, (err, res, body) =>
       console.log "err", err
       console.log "body", body
-      console.log "res", res.statusCode
+      console.log "res", res
       if err?
         return @_errorHandler
           statusCode: res?.statusCode
