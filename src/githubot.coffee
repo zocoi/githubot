@@ -41,7 +41,7 @@ class Github
     req = req.header("Host", "github.groupondev.com")
     req = req.header("User-Agent", "GitHubot/#{version}")
     oauth_token = @_opt "token"
-    req = req.header("Authorization", "token #{oauth_token}") if oauth_token?
+    # req = req.header("Authorization", "token #{oauth_token}") if oauth_token?
     console.log oauth_token, url
     args = []
     args.push JSON.stringify data if data?
@@ -50,6 +50,7 @@ class Github
     @requestQueue.push task, (err, res, body) =>
       console.log "err", err
       console.log "body", body
+      console.log "res", res.statusCode
       if err?
         return @_errorHandler
           statusCode: res?.statusCode
